@@ -88,6 +88,17 @@ namespace Lynx
 		template<typename T>
 		class ScopedPtr<T[]>
 		{
+		public:
+			ScopedPtr(T* ptr = nullptr) noexcept = delete;
+			virtual ~ScopedPtr() noexcept = delete;
+			ScopedPtr(ScopedPtr&) noexcept = delete;
+			ScopedPtr(ScopedPtr&&) noexcept = delete;
+			ScopedPtr(const ScopedPtr&) noexcept = delete;
+			ScopedPtr(const ScopedPtr&&) noexcept = delete;
+			ScopedPtr& operator=(ScopedPtr&) noexcept = delete;
+			ScopedPtr& operator=(ScopedPtr&&) noexcept = delete;
+			ScopedPtr& operator=(const ScopedPtr&) noexcept = delete;
+			ScopedPtr& operator=(const ScopedPtr&&) noexcept = delete;
 		};
 
 	} //# namespace SmartPtr
