@@ -35,6 +35,7 @@ namespace Lynx
 				_ptr = nullptr;
 			}
 
+		public:
 			void Reset(T* ptr = nullptr) noexcept
 			{
 				delete _ptr;
@@ -80,6 +81,13 @@ namespace Lynx
 
 		private:
 			T* _ptr;
+		};
+
+
+		//# 禁止使用 ScopedPtr 针对 T[] 的特化。
+		template<typename T>
+		class ScopedPtr<T[]>
+		{
 		};
 
 	} //# namespace SmartPtr
