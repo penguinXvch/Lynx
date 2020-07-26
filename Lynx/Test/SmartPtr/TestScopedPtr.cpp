@@ -147,6 +147,78 @@ namespace Test
 				assert(sp1.Get() == nullptr);
 				assert(sp2.Get() == ptr);
 			}
+
+			//# 测试 ScopedPtr::operator bool。
+			{
+				ScopedPtr<int> sp(new int);
+				assert(bool(sp) == true);
+				sp.Reset();
+				assert(bool(sp) == false);
+			}
+
+			//# 测试 ScopedPtr::Swap。
+			{
+				int* ptr1 = new int(1);
+				int* ptr2 = new int(2);
+
+				ScopedPtr<int> sp1(ptr1);
+				ScopedPtr<int> sp2(ptr2);
+				assert(*sp1 == 1);
+				assert(*sp2 == 2);
+				assert(sp1.Get() == ptr1);
+				assert(sp2.Get() == ptr2);
+				
+				sp1.Swap(sp2);
+				assert(*sp1 == 2);
+				assert(*sp2 == 1);
+				assert(sp1.Get() == ptr2);
+				assert(sp2.Get() == ptr1);
+			}
+
+			//# 测试 ScopedPtr::ElementType。
+			{
+				ScopedPtr<int> sp(new int);
+				assert((std::is_same_v<ScopedPtr<int>::ElementType, int> == 1));
+			}
+
+			//# 禁止使用 ScopedPtr 针对 T[] 的特化。
+			{
+				// ScopedPtr<int[]> sp1;
+				// ScopedPtr<int[]> sp2(new int[10]);
+			}
+
+			//# 测试 Lynx::Swap。
+			{
+				int* ptr1 = new int(1);
+				int* ptr2 = new int(2);
+
+				ScopedPtr<int> sp1(ptr1);
+				ScopedPtr<int> sp2(ptr2);
+				assert(*sp1 == 1);
+				assert(*sp2 == 2);
+				assert(sp1.Get() == ptr1);
+				assert(sp2.Get() == ptr2);
+
+				Lynx::Swap(sp1, sp2);
+				assert(*sp1 == 2);
+				assert(*sp2 == 1);
+				assert(sp1.Get() == ptr2);
+				assert(sp2.Get() == ptr1);
+			}
+
+			//# 测试 Lynx::operator== 和 Lynx::operator!=。
+			{
+				using Lynx::operator==;
+				using Lynx::operator!=;
+
+				ScopedPtr<int> sp;
+				sp == nullptr;
+				nullptr == sp;
+
+				sp.Reset(new int);
+				sp != nullptr;
+				nullptr != sp;
+			}
 		}
 
 	} //# namespace SmartPtr

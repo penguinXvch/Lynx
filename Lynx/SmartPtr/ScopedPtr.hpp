@@ -71,8 +71,8 @@ namespace Lynx
 
 			void Swap(ScopedPtr& sp) noexcept
 			{
-				T* tmp = *sp;
-				*sp = _ptr;
+				T* tmp = sp.Release();
+				sp.Reset(_ptr);
 				_ptr = tmp;
 			}
 
@@ -118,25 +118,25 @@ namespace Lynx
 	template<typename T>
 	bool operator==(const SmartPtr::ScopedPtr<T>& sp, std::nullptr_t) noexcept
 	{
-		return *sp == nullptr;
+		return sp.Get() == nullptr;
 	}
 
 	template<typename T>
 	bool operator==(std::nullptr_t, const SmartPtr::ScopedPtr<T>& sp) noexcept
 	{
-		return *sp == nullptr;
+		return sp.Get() == nullptr;
 	}
 
 	template<typename T>
 	bool operator!=(const SmartPtr::ScopedPtr<T>& sp, std::nullptr_t) noexcept
 	{
-		return *sp != nullptr;
+		return sp.Get() != nullptr;
 	}
 
 	template<typename T>
 	bool operator!=(std::nullptr_t, const SmartPtr::ScopedPtr<T>& sp) noexcept
 	{
-		return *sp != nullptr;
+		return sp.Get() != nullptr;
 	}
 
 } //# namespace Lynx
