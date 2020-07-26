@@ -83,6 +83,21 @@ namespace Test
 				// sp2 != sp1;
 			}
 
+			//# 测试 ScopedPtr::Reset。
+			{
+				ScopedPtr<int> sp(new int);
+				assert(sp.Get() != nullptr);
+
+				sp.Reset();
+				assert(sp.Get() == nullptr);
+
+				int* ptr = new int;
+				sp.Reset(ptr);
+				assert(ptr != nullptr);
+				assert(sp.Get() != nullptr);
+				assert(sp.Get() == ptr);
+			}
+
 			//# 测试 ScopedPtr::Get。
 			//# 测试 ScopedPtr::operator*。
 			{
@@ -100,6 +115,37 @@ namespace Test
 
 				*(sp.Get()) = 3;
 				assert(*(sp.Get()) == 3 && *ptr == 3);
+			}
+
+			//# 测试 ScopedPtr::operator->。
+			{
+				struct Foo
+				{
+					int value = 1;
+				};
+
+				ScopedPtr<Foo> sp(new Foo);
+				assert(sp->value == 1);
+
+				sp->value = 10;
+				assert(sp->value != 1 && sp->value == 10);
+			}
+
+			//# 测试 ScopedPtr::Release。
+			{
+				int* ptr = new int;
+
+				ScopedPtr<int> sp(ptr);
+				assert(sp.Get() != nullptr);
+				assert(sp.Release() == ptr);
+				assert(sp.Get() == nullptr);
+
+				ScopedPtr<int> sp1(ptr);
+				assert(sp1.Get() != nullptr);
+
+				ScopedPtr<int> sp2(sp1.Release());
+				assert(sp1.Get() == nullptr);
+				assert(sp2.Get() == ptr);
 			}
 		}
 
