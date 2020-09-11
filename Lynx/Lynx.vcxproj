@@ -23,19 +23,19 @@
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{8e5bb7a7-8611-4358-b9ed-823216c33a15}</ProjectGuid>
     <RootNamespace>Lynx</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -146,6 +146,7 @@
     <ClCompile Include="Test\TestMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CircularQueue_V1\CircularQueue.hpp" />
     <ClInclude Include="SmartPtr\ScopedPtr.hpp" />
     <ClInclude Include="Test\SmartPtr\TestScopedPtr.hpp" />
     <ClInclude Include="Test\TestMain.hpp" />
