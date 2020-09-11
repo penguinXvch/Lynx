@@ -147,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CircularQueue_V1\CircularQueue.hpp" />
+    <ClInclude Include="CircularQueue_V2\CircularQueue.hpp" />
     <ClInclude Include="SmartPtr\ScopedPtr.hpp" />
     <ClInclude Include="Test\SmartPtr\TestScopedPtr.hpp" />
     <ClInclude Include="Test\TestMain.hpp" />
