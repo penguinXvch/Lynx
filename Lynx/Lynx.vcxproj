@@ -42,13 +42,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -142,6 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Test\CircularQueue_V1\TestCircularQueue.cpp" />
     <ClCompile Include="Test\SmartPtr\TestScopedPtr.cpp" />
     <ClCompile Include="Test\TestMain.cpp" />
   </ItemGroup>
@@ -149,6 +150,7 @@
     <ClInclude Include="CircularQueue_V1\CircularQueue.hpp" />
     <ClInclude Include="CircularQueue_V2\CircularQueue.hpp" />
     <ClInclude Include="SmartPtr\ScopedPtr.hpp" />
+    <ClInclude Include="Test\CircularQueue_V1\TestCircularQueue.hpp" />
     <ClInclude Include="Test\SmartPtr\TestScopedPtr.hpp" />
     <ClInclude Include="Test\TestMain.hpp" />
   </ItemGroup>

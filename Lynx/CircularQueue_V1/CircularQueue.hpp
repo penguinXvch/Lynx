@@ -35,11 +35,11 @@ namespace Lynx
 
 		public:
 			void SetCircularQueueSize(const std::size_t& len);
-			std::size_t GetCircularQueueSize() const noexcept;
+			std::size_t GetCircularQueueSize() noexcept;
 
 		public:
 			bool AddData(const T& data) noexcept;
-			std::vector<T> GetData() const noexcept;
+			std::vector<T> GetData() noexcept;
 
 		private:
 			T* mArr;
@@ -92,7 +92,7 @@ namespace Lynx
 		}
 
 		template<typename T>
-		std::size_t CircularQueue<T>::GetCircularQueueSize() const noexcept
+		std::size_t CircularQueue<T>::GetCircularQueueSize() noexcept
 		{
 			std::lock_guard<std::mutex> _(mMutex);
 			return mLen;
@@ -125,7 +125,7 @@ namespace Lynx
 		}
 
 		template<typename T>
-		std::vector<T> CircularQueue<T>::GetData() const noexcept
+		std::vector<T> CircularQueue<T>::GetData() noexcept
 		{
 			std::lock_guard<std::mutex> _(mMutex);
 
