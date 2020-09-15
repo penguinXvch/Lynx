@@ -1,6 +1,6 @@
 ﻿
 #include "./SmartPtr/TestScopedPtr.hpp"
-#include "./CircularQueue_V1/TestCircularQueue.hpp"
+#include "./CircularQueue_ThreadSafety_V1/TestCircularQueue.hpp"
 
 namespace Test
 {
@@ -8,7 +8,7 @@ namespace Test
 	int Main() noexcept
 	{
 		SmartPtr::TestScopedPtr();
-		CircularQueue_V1::TestCircularQueue();
+		CircularQueue_ThreadSafety_V1::TestCircularQueue();
 		return 0;
 	}
 

@@ -7,7 +7,7 @@
 namespace Lynx
 {
 
-	namespace CircularQueue_V1
+	namespace CircularQueue_ThreadSafety_V1
 	{
 
 		/*
@@ -146,6 +146,6 @@ namespace Lynx
 			return vec;
 		}
 
-	} //# namespace CircularQueue_V1
+	} //# namespace CircularQueue_ThreadSafety_V1
 
 } //# namespace Lynx

@@ -7,7 +7,7 @@
 namespace Lynx
 {
 
-    namespace CircularQueue_V2
+    namespace CircularQueue_ThreadSafety_V2
     {
 
         /*
@@ -90,6 +90,6 @@ namespace Lynx
             }
         }
 
-    } //# namespace CircularQueue_V2
+    } //# namespace CircularQueue_ThreadSafety_V2
 
 } //# namespace Lynx
