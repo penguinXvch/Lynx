@@ -1,5 +1,5 @@
 # Lynx
-Lynx C++ Library.
+Lynx C++ 库。
 
 ### 开发环境：
 + Windows 10 Professional (latest)
