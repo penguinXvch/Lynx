@@ -118,6 +118,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -132,6 +133,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -142,7 +144,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Test\CircularQueue_ThreadSafety_V1\TestCircularQueue.cpp" />
+    <ClCompile Include="Test\CircularQueue_ThreadSafety_V1\TestCircularQueueV1.cpp" />
+    <ClCompile Include="Test\CircularQueue_ThreadSafety_V2\TestCircularQueueV2.cpp" />
     <ClCompile Include="Test\SmartPtr\TestScopedPtr.cpp" />
     <ClCompile Include="Test\TestMain.cpp" />
   </ItemGroup>
@@ -150,7 +153,8 @@
     <ClInclude Include="CircularQueue_ThreadSafety_V1\CircularQueue.hpp" />
     <ClInclude Include="CircularQueue_ThreadSafety_V2\CircularQueue.hpp" />
     <ClInclude Include="SmartPtr\ScopedPtr.hpp" />
-    <ClInclude Include="Test\CircularQueue_ThreadSafety_V1\TestCircularQueue.hpp" />
+    <ClInclude Include="Test\CircularQueue_ThreadSafety_V1\TestCircularQueueV1.hpp" />
+    <ClInclude Include="Test\CircularQueue_ThreadSafety_V2\TestCircularQueueV2.hpp" />
     <ClInclude Include="Test\SmartPtr\TestScopedPtr.hpp" />
     <ClInclude Include="Test\TestMain.hpp" />
   </ItemGroup>

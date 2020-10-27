@@ -1,8 +1,8 @@
 ﻿
 #pragma once
 
-#include<array>
-#include<mutex>
+#include <array>
+#include <mutex>
 
 namespace Lynx
 {
@@ -19,18 +19,18 @@ namespace Lynx
         class CircularQueue
         {
         public:
-	    explicit CircularQueue() noexcept;
-	    virtual ~CircularQueue() noexcept = default;
+			explicit CircularQueue() noexcept;
+			virtual ~CircularQueue() noexcept = default;
 
-	public:
-	    CircularQueue(CircularQueue<T, N>&) noexcept = delete;
-	    CircularQueue(CircularQueue<T, N>&&) noexcept = delete;
-	    CircularQueue(const CircularQueue<T, N>&) noexcept = delete;
-	    CircularQueue(const CircularQueue<T, N>&&) noexcept = delete;
-	    CircularQueue<T, N>& operator=(CircularQueue<T, N>&) noexcept = delete;
-	    CircularQueue<T, N>& operator=(CircularQueue<T, N>&&) noexcept = delete;
-	    CircularQueue<T, N>& operator=(const CircularQueue<T, N>&) noexcept = delete;
-	    CircularQueue<T, N>& operator=(const CircularQueue<T, N>&&) noexcept = delete;
+		public:
+			CircularQueue(CircularQueue<T, N>&) noexcept = delete;
+			CircularQueue(CircularQueue<T, N>&&) noexcept = delete;
+			CircularQueue(const CircularQueue<T, N>&) noexcept = delete;
+			CircularQueue(const CircularQueue<T, N>&&) noexcept = delete;
+			CircularQueue<T, N>& operator=(CircularQueue<T, N>&) noexcept = delete;
+			CircularQueue<T, N>& operator=(CircularQueue<T, N>&&) noexcept = delete;
+			CircularQueue<T, N>& operator=(const CircularQueue<T, N>&) noexcept = delete;
+			CircularQueue<T, N>& operator=(const CircularQueue<T, N>&&) noexcept = delete;
 
         public:
             bool Push(const T& value) noexcept;

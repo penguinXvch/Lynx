@@ -1,8 +1,8 @@
 ﻿
 #pragma once
 
-#include<vector>
-#include<mutex>
+#include <vector>
+#include <mutex>
 
 namespace Lynx
 {
