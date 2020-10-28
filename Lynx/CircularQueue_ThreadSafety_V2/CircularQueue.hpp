@@ -91,9 +91,9 @@ namespace Lynx
         }
 
 
-		/* 
-		 *  禁止使用 CircularQueue 针对 N == 0 的特化。
-		 */
+        /* 
+         *  禁止使用 CircularQueue 针对 N == 0 的特化。
+         */
         template<typename T>
         class CircularQueue<T, 0>
         {
