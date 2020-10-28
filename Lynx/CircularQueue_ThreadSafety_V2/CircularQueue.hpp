@@ -94,9 +94,9 @@ namespace Lynx
 		/* 
 		 *  禁止使用 CircularQueue 针对 N == 0 的特化。
 		 */
-		template<typename T>
-		class CircularQueue<T, 0>
-		{
+        template<typename T>
+        class CircularQueue<T, 0>
+        {
         public:
             explicit CircularQueue() noexcept = delete;
             virtual ~CircularQueue() noexcept = delete;
@@ -110,7 +110,7 @@ namespace Lynx
             CircularQueue<T, 0>& operator=(CircularQueue<T, 0>&&) noexcept = delete;
             CircularQueue<T, 0>& operator=(const CircularQueue<T, 0>&) noexcept = delete;
             CircularQueue<T, 0>& operator=(const CircularQueue<T, 0>&&) noexcept = delete;
-		};
+        };
 
     } //# namespace CircularQueue_ThreadSafety_V2
 
