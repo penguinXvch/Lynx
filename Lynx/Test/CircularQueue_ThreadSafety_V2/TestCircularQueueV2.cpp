@@ -16,10 +16,10 @@ namespace Test
 			//# 测试 CircularQueue::CircularQueue()。
 			{
 				CircularQueue<int, 1> cq1;
-				CircularQueue<int, 0> cq2;
+				// CircularQueue<int, 0> cq2;
 
 				CircularQueue<std::vector<int>, 1> cq3;
-				CircularQueue<std::vector<int>, 0> cq4;
+				// CircularQueue<std::vector<int>, 0> cq4;
 			}
 
 			//# 测试 CircularQueue::CircularQueue(CircularQueue<T, N>&)。
