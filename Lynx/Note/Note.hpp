@@ -19,10 +19,10 @@ namespace Lynx
 			static_assert(N > NoteLengthLimit, "Code notes are too short.");
 		}
 
-#define Note(StringLiteral)	\
+#define ScopedNote(StringLiteral)	\
     ::Lynx::Note::CheckNoteLength(L##StringLiteral);
 
-#define Global_Note(StringLiteral)											\
+#define Note(StringLiteral)													\
     static_assert(															\
         ((sizeof(L##StringLiteral) / sizeof(wchar_t)) > NoteLengthLimit),	\
         "Code notes are too short.");
