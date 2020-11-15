@@ -1,5 +1,5 @@
 ﻿
-#include "../../CircularQueue_ThreadSafety_V2/CircularQueue.hpp"
+#include "../../CircularQueue_ThreadSafety_V2/CircularQueueV2.hpp"
 #include <cassert>
 #include <vector>
 

@@ -151,8 +151,8 @@
     <ClCompile Include="Test\TestMain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CircularQueue_ThreadSafety_V1\CircularQueue.hpp" />
-    <ClInclude Include="CircularQueue_ThreadSafety_V2\CircularQueue.hpp" />
+    <ClInclude Include="CircularQueue_ThreadSafety_V1\CircularQueueV1.hpp" />
+    <ClInclude Include="CircularQueue_ThreadSafety_V2\CircularQueueV2.hpp" />
     <ClInclude Include="Note\Note.hpp" />
     <ClInclude Include="SmartPtr\ScopedPtr.hpp" />
     <ClInclude Include="Test\CircularQueue_ThreadSafety_V1\TestCircularQueueV1.hpp" />
