@@ -154,6 +154,7 @@
     <ClInclude Include="CircularQueue_ThreadSafety_V1\CircularQueueV1.hpp" />
     <ClInclude Include="CircularQueue_ThreadSafety_V2\CircularQueueV2.hpp" />
     <ClInclude Include="Note\Note.hpp" />
+    <ClInclude Include="SmartPtr\ScopedArr.hpp" />
     <ClInclude Include="SmartPtr\ScopedPtr.hpp" />
     <ClInclude Include="Test\CircularQueue_ThreadSafety_V1\TestCircularQueueV1.hpp" />
     <ClInclude Include="Test\CircularQueue_ThreadSafety_V2\TestCircularQueueV2.hpp" />
