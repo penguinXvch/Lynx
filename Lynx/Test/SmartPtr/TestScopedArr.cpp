@@ -41,9 +41,10 @@ namespace Test
 				};
 
 				int count = 0;
-				
+				assert(count == 0);
+
 				{
-					ScopedArr<Foo> sa3(new Foo[2]{ Foo(&count), Foo(&count) });
+					ScopedArr<Foo> sa(new Foo[2]{ Foo(&count), Foo(&count) });
 					assert(count == 2);
 				}
 
