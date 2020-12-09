@@ -117,7 +117,7 @@
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
+      <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -132,7 +132,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
+      <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -150,6 +150,7 @@
     <ClCompile Include="Test\SmartPtr\TestScopedArr.cpp" />
     <ClCompile Include="Test\SmartPtr\TestScopedPtr.cpp" />
     <ClCompile Include="Test\TestMain.cpp" />
+    <ClCompile Include="Test\Tools.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CircularQueue_ThreadSafety_V1\CircularQueueV1.hpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="Test\SmartPtr\TestScopedArr.hpp" />
     <ClInclude Include="Test\SmartPtr\TestScopedPtr.hpp" />
     <ClInclude Include="Test\TestMain.hpp" />
+    <ClInclude Include="Test\Tools.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
