@@ -36,10 +36,10 @@ namespace Test
 			std::cout << Str << std::endl;
 		}
 
-		template<typename... Ts, std::size_t N = sizeof...(Ts)>
-		void Test(const std::array<const char*, N>& Strings) noexcept
+		template<typename... Ts>
+		void Test(const std::array<const char*, sizeof...(Ts)>& Strings) noexcept
 		{
-			std::array<const char*, N> arr{ TestProjectCategory<Ts>::Category... };
+			std::array<const char*, sizeof...(Ts)> arr{ TestProjectCategory<Ts>::Category... };
 
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),
 				FOREGROUND_RED | FOREGROUND_GREEN);
@@ -72,6 +72,12 @@ namespace Test
 		}
 
 		void PassTest() noexcept;
+
+		void _PassOrFail(const bool& Cond, const char* Str,
+			const char* const File, const char* const Func, const std::size_t& Line) noexcept;
+
+#define PassOrFail(Cond) \
+	::Test::Tools::_PassOrFail(Cond, #Cond, __FILE__, __FUNCTION__, __LINE__)
 
 	} //# namespace Tools
 
