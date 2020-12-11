@@ -15,6 +15,7 @@ namespace Test
 		struct Type {};
 		struct Method {};
 		struct Function {};
+		struct Macro {};
 
 		namespace
 		{
@@ -63,6 +64,13 @@ namespace Test
 				static const char* const Category;
 			};
 			const char* const TestProjectCategory<Function>::Category = "(Function)";
+
+			template<>
+			struct TestProjectCategory<Macro>
+			{
+				static const char* const Category;
+			};
+			const char* const TestProjectCategory<Macro>::Category = "(Macro)";
 		}
 
 		template<typename T>

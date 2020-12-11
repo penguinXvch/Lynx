@@ -1,5 +1,6 @@
 ﻿
 #include "../../Note/Note.hpp"
+#include "../Tools.hpp"
 
 namespace Test
 {
@@ -9,7 +10,16 @@ namespace Test
 
 		void TestNote() noexcept
 		{
+			using Test::Tools::TestProject;
+			using Test::Tools::Test;
+			using Test::Tools::PassTest;
+			using Test::Tools::PassTestProject;
+			using _Macro = Test::Tools::Macro;
+
+			TestProject<_Macro>("ScopedNote + Note");
+
 			//# 测试 ScopedNote 与 Note。
+			Test<_Macro, _Macro>({ "ScopedNote", "Note" });
 			{
 				Note
 				(
@@ -39,6 +49,9 @@ namespace Test
 				//	 "这是测试用例，此用例注释字符数小于限定值。"
 				// );
 			}
+			PassTest();
+
+			PassTestProject();
 		}
 
 	} //# namespace Note
