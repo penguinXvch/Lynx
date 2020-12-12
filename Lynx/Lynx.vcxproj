@@ -144,8 +144,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Test\CircularQueue_ThreadSafety_V1\TestCircularQueueV1.cpp" />
-    <ClCompile Include="Test\CircularQueue_ThreadSafety_V2\TestCircularQueueV2.cpp" />
+    <ClCompile Include="Test\CircularQueue\CircularQueue_ThreadSafety_V1\TestCircularQueueV1.cpp" />
+    <ClCompile Include="Test\CircularQueue\CircularQueue_ThreadSafety_V2\TestCircularQueueV2.cpp" />
     <ClCompile Include="Test\Note\TestNote.cpp" />
     <ClCompile Include="Test\SmartPtr\TestScopedArr.cpp" />
     <ClCompile Include="Test\SmartPtr\TestScopedPtr.cpp" />
@@ -153,13 +153,13 @@
     <ClCompile Include="Test\Tools.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CircularQueue_ThreadSafety_V1\CircularQueueV1.hpp" />
-    <ClInclude Include="CircularQueue_ThreadSafety_V2\CircularQueueV2.hpp" />
+    <ClInclude Include="CircularQueue\CircularQueue_ThreadSafety_V1\CircularQueueV1.hpp" />
+    <ClInclude Include="CircularQueue\CircularQueue_ThreadSafety_V2\CircularQueueV2.hpp" />
     <ClInclude Include="Note\Note.hpp" />
     <ClInclude Include="SmartPtr\ScopedArr.hpp" />
     <ClInclude Include="SmartPtr\ScopedPtr.hpp" />
-    <ClInclude Include="Test\CircularQueue_ThreadSafety_V1\TestCircularQueueV1.hpp" />
-    <ClInclude Include="Test\CircularQueue_ThreadSafety_V2\TestCircularQueueV2.hpp" />
+    <ClInclude Include="Test\CircularQueue\CircularQueue_ThreadSafety_V1\TestCircularQueueV1.hpp" />
+    <ClInclude Include="Test\CircularQueue\CircularQueue_ThreadSafety_V2\TestCircularQueueV2.hpp" />
     <ClInclude Include="Test\Note\TestNote.hpp" />
     <ClInclude Include="Test\SmartPtr\TestScopedArr.hpp" />
     <ClInclude Include="Test\SmartPtr\TestScopedPtr.hpp" />

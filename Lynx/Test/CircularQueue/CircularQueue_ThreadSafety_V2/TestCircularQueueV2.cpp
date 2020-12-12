@@ -1,6 +1,6 @@
 ﻿
-#include "../../CircularQueue_ThreadSafety_V2/CircularQueueV2.hpp"
-#include "../Tools.hpp"
+#include "../../../CircularQueue/CircularQueue_ThreadSafety_V2/CircularQueueV2.hpp"
+#include "../../Tools.hpp"
 #include <vector>
 
 namespace Test

@@ -1,8 +1,8 @@
 ﻿
 #include "./SmartPtr/TestScopedPtr.hpp"
 #include "./SmartPtr/TestScopedArr.hpp"
-#include "./CircularQueue_ThreadSafety_V1/TestCircularQueueV1.hpp"
-#include "./CircularQueue_ThreadSafety_V2/TestCircularQueueV2.hpp"
+#include "./CircularQueue/CircularQueue_ThreadSafety_V1/TestCircularQueueV1.hpp"
+#include "./CircularQueue/CircularQueue_ThreadSafety_V2/TestCircularQueueV2.hpp"
 #include "./Note/TestNote.hpp"
 
 namespace Test

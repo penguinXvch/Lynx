@@ -1,6 +1,6 @@
 ﻿
-#include "../../CircularQueue_ThreadSafety_V1/CircularQueueV1.hpp"
-#include "../Tools.hpp"
+#include "../../../CircularQueue/CircularQueue_ThreadSafety_V1/CircularQueueV1.hpp"
+#include "../../Tools.hpp"
 #include <vector>
 #include <string>
 
