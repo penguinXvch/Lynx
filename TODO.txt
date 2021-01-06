@@ -1,4 +1,3 @@
-#  Test/TestScopedArr.cpp 中测试工具的替换。
 #  Test/TestScopedPtr.cpp 中测试工具的替换。
 
 #  完善 Tuple/TupleV1.hpp 代码。
