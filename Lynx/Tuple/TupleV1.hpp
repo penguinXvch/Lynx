@@ -94,3 +94,93 @@ namespace Lynx
 	} //# namespace Tuple_V1
 
 } //# namespace Lynx
+
+
+namespace Lynx
+{
+
+	namespace Tuple_V1
+	{
+
+		namespace
+		{
+			template<std::size_t N, typename T, typename... Ts>
+			struct TupleElementTypeImpl
+			{
+				using Type = typename TupleElementTypeImpl<N - 1, Ts...>::Type;
+			};
+
+			template<typename T, typename... Ts>
+			struct TupleElementTypeImpl<0, T, Ts...>
+			{
+				using Type = T;
+			};
+		}
+
+		template<std::size_t, typename>
+		struct TupleElementType
+		{
+			constexpr explicit TupleElementType() noexcept = delete;
+			~TupleElementType() noexcept = delete;
+			constexpr explicit TupleElementType(TupleElementType&) noexcept = delete;
+			constexpr explicit TupleElementType(TupleElementType&&) noexcept = delete;
+			constexpr explicit TupleElementType(const TupleElementType&) noexcept = delete;
+			constexpr explicit TupleElementType(const TupleElementType&&) noexcept = delete;
+			constexpr TupleElementType& operator=(TupleElementType&) noexcept = delete;
+			constexpr TupleElementType& operator=(TupleElementType&&) noexcept = delete;
+			constexpr TupleElementType& operator=(const TupleElementType&) noexcept = delete;
+			constexpr TupleElementType& operator=(const TupleElementType&&) noexcept = delete;
+		};
+
+		template<std::size_t N, typename... Ts>
+		struct TupleElementType<N, Tuple<Ts...>>
+		{
+			using Type = std::enable_if_t
+			<
+				(N >= 0) && (N < sizeof...(Ts)),
+				typename TupleElementTypeImpl<N, Ts...>::Type
+			>;
+		};
+
+	} //# namespace Tuple_V1
+
+} //# namespace Lynx
+
+
+namespace Lynx
+{
+
+	namespace Tuple_V1
+	{
+
+		template<std::size_t N, typename... Ts>
+		inline constexpr auto Get(Tuple<Ts...>& tuple) noexcept -> typename TupleElementType<N, Tuple<Ts...>>::Type&
+		{
+			return static_cast<typename TupleElementType<N, Tuple<Ts...>>::Type&>
+				(tuple.TupleCell<N, typename TupleElementType<N, Tuple<Ts...>>::Type>::value);
+		}
+
+		template<std::size_t N, typename... Ts>
+		inline constexpr auto Get(Tuple<Ts...>&& tuple) noexcept -> typename TupleElementType<N, Tuple<Ts...>>::Type&&
+		{
+			return static_cast<typename TupleElementType<N, Tuple<Ts...>>::Type&&>
+				(tuple.TupleCell<N, typename TupleElementType<N, Tuple<Ts...>>::Type>::value);
+		}
+
+		template<std::size_t N, typename... Ts>
+		inline constexpr auto Get(const Tuple<Ts...>& tuple) noexcept -> const typename TupleElementType<N, Tuple<Ts...>>::Type&
+		{
+			return static_cast<const typename TupleElementType<N, Tuple<Ts...>>::Type&>
+				(tuple.TupleCell<N, typename TupleElementType<N, Tuple<Ts...>>::Type>::value);
+		}
+
+		template<std::size_t N, typename... Ts>
+		inline constexpr auto Get(const Tuple<Ts...>&& tuple) noexcept -> const typename TupleElementType<N, Tuple<Ts...>>::Type&&
+		{
+			return static_cast<const typename TupleElementType<N, Tuple<Ts...>>::Type&&>
+				(tuple.TupleCell<N, typename TupleElementType<N, Tuple<Ts...>>::Type>::value);
+		}
+
+	} //# namespace Tuple_V1
+
+} //# namespace Lynx
