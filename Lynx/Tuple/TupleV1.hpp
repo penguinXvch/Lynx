@@ -150,7 +150,7 @@ namespace Lynx
 		-> typename TupleElementType<N, Tuple_V1::Tuple<Ts...>>::Type&
 	{
 		return static_cast<typename TupleElementType<N, Tuple_V1::Tuple<Ts...>>::Type&>
-			(tuple.TupleCell<N, typename TupleElementType<N, Tuple_V1::Tuple<Ts...>>::Type>::value);
+			(tuple.Tuple_V1::TupleCell<N, typename TupleElementType<N, Tuple_V1::Tuple<Ts...>>::Type>::value);
 	}
 
 	template<std::size_t N, typename... Ts>
@@ -158,7 +158,7 @@ namespace Lynx
 		-> typename TupleElementType<N, Tuple_V1::Tuple<Ts...>>::Type&&
 	{
 		return static_cast<typename TupleElementType<N, Tuple_V1::Tuple<Ts...>>::Type&&>
-			(tuple.TupleCell<N, typename TupleElementType<N, Tuple_V1::Tuple<Ts...>>::Type>::value);
+			(tuple.Tuple_V1::TupleCell<N, typename TupleElementType<N, Tuple_V1::Tuple<Ts...>>::Type>::value);
 	}
 
 	template<std::size_t N, typename... Ts>
@@ -166,7 +166,7 @@ namespace Lynx
 		-> const typename TupleElementType<N, Tuple_V1::Tuple<Ts...>>::Type&
 	{
 		return static_cast<const typename TupleElementType<N, Tuple_V1::Tuple<Ts...>>::Type&>
-			(tuple.TupleCell<N, typename TupleElementType<N, Tuple_V1::Tuple<Ts...>>::Type>::value);
+			(tuple.Tuple_V1::TupleCell<N, typename TupleElementType<N, Tuple_V1::Tuple<Ts...>>::Type>::value);
 	}
 
 	template<std::size_t N, typename... Ts>
@@ -174,7 +174,7 @@ namespace Lynx
 		-> const typename TupleElementType<N, Tuple_V1::Tuple<Ts...>>::Type&&
 	{
 		return static_cast<const typename TupleElementType<N, Tuple_V1::Tuple<Ts...>>::Type&&>
-			(tuple.TupleCell<N, typename TupleElementType<N, Tuple_V1::Tuple<Ts...>>::Type>::value);
+			(tuple.Tuple_V1::TupleCell<N, typename TupleElementType<N, Tuple_V1::Tuple<Ts...>>::Type>::value);
 	}
 
 } //# namespace Lynx
