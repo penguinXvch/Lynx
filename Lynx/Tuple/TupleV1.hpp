@@ -178,3 +178,58 @@ namespace Lynx
 	}
 
 } //# namespace Lynx
+
+
+namespace Lynx
+{
+
+	namespace
+	{
+		template<std::size_t N, typename T, std::size_t I, typename U, typename... Us>
+		struct GetImpl
+		{
+			static_assert(I < N, "Index out of range.");
+			static constexpr std::size_t Value = GetImpl<N, T, I + 1, Us...>::Value;
+		};
+
+		template<std::size_t N, typename T, std::size_t I, typename... Us>
+		struct GetImpl<N, T, I, T, Us...>
+		{
+			static_assert(I < N, "Index out of range.");
+			static constexpr std::size_t Value = I;
+		};
+	}
+
+	template<typename T, typename... Ts>
+	inline constexpr T& Get(Tuple_V1::Tuple<Ts...>& tuple) noexcept
+	{
+		constexpr std::size_t N = GetImpl<sizeof...(Ts), T, 0, Ts...>::Value;
+		return static_cast<T&>
+			(tuple.Tuple_V1::TupleCell<N, typename TupleElementType<N, Tuple_V1::Tuple<Ts...>>::Type>::value);
+	}
+
+	template<typename T, typename... Ts>
+	inline constexpr T&& Get(Tuple_V1::Tuple<Ts...>&& tuple) noexcept
+	{
+		constexpr std::size_t N = GetImpl<sizeof...(Ts), T, 0, Ts...>::Value;
+		return static_cast<T&&>
+			(tuple.Tuple_V1::TupleCell<N, typename TupleElementType<N, Tuple_V1::Tuple<Ts...>>::Type>::value);
+	}
+
+	template<typename T, typename... Ts>
+	inline constexpr const T& Get(const Tuple_V1::Tuple<Ts...>& tuple) noexcept
+	{
+		constexpr std::size_t N = GetImpl<sizeof...(Ts), T, 0, Ts...>::Value;
+		return static_cast<const T&>
+			(tuple.Tuple_V1::TupleCell<N, typename TupleElementType<N, Tuple_V1::Tuple<Ts...>>::Type>::value);
+	}
+
+	template<typename T, typename... Ts>
+	inline constexpr const T&& Get(const Tuple_V1::Tuple<Ts...>&& tuple) noexcept
+	{
+		constexpr std::size_t N = GetImpl<sizeof...(Ts), T, 0, Ts...>::Value;
+		return static_cast<const T&&>
+			(tuple.Tuple_V1::TupleCell<N, typename TupleElementType<N, Tuple_V1::Tuple<Ts...>>::Type>::value);
+	}
+
+} //# namespace Lynx
