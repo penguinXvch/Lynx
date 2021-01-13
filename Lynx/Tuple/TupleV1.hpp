@@ -177,12 +177,6 @@ namespace Lynx
 			(tuple.Tuple_V1::TupleCell<N, typename TupleElementType<N, Tuple_V1::Tuple<Ts...>>::Type>::value);
 	}
 
-} //# namespace Lynx
-
-
-namespace Lynx
-{
-
 	namespace
 	{
 		template<std::size_t N, typename T, std::size_t I, typename U, typename... Us>
@@ -230,6 +224,18 @@ namespace Lynx
 		constexpr std::size_t N = GetImpl<sizeof...(Ts), T, 0, Ts...>::value;
 		return static_cast<const T&&>
 			(tuple.Tuple_V1::TupleCell<N, typename TupleElementType<N, Tuple_V1::Tuple<Ts...>>::Type>::value);
+	}
+
+} //# namespace Lynx
+
+
+namespace Lynx
+{
+
+	template<typename... Ts>
+	inline constexpr auto MakeTuple(Ts&&... args) noexcept -> Tuple_V1::Tuple<std::remove_reference_t<Ts>...>
+	{
+		return Tuple_V1::Tuple<std::remove_reference_t<Ts>...>{ std::forward<Ts>(args)... };
 	}
 
 } //# namespace Lynx
