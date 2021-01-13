@@ -238,6 +238,7 @@ namespace Lynx
 		return Tuple_V1::Tuple<std::remove_reference_t<Ts>...>{ std::forward<Ts>(args)... };
 	}
 
+	/*
 	struct IgnoreType
 	{
 		template<typename T>
@@ -254,5 +255,6 @@ namespace Lynx
 	{
 		return Tuple_V1::Tuple<Ts&...>{ args... };
 	}
+	*/
 
 } //# namespace Lynx
