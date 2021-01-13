@@ -238,4 +238,21 @@ namespace Lynx
 		return Tuple_V1::Tuple<std::remove_reference_t<Ts>...>{ std::forward<Ts>(args)... };
 	}
 
+	struct IgnoreType
+	{
+		template<typename T>
+		const IgnoreType& operator=(const T&) const noexcept
+		{
+			return *this;
+		}
+	};
+
+	static const IgnoreType Ignore;
+
+	template<typename... Ts>
+	inline constexpr auto Tie(Ts&... args) noexcept -> Tuple_V1::Tuple<Ts&...>
+	{
+		return Tuple_V1::Tuple<Ts&...>{ args... };
+	}
+
 } //# namespace Lynx
