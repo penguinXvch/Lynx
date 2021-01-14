@@ -205,27 +205,27 @@ namespace Lynx
 		struct Tuple
 			: public TupleImpl<std::make_index_sequence<sizeof...(Ts)>, Ts...>
 		{
-			constexpr explicit Tuple() noexcept
+			constexpr Tuple() noexcept
 				: TupleImpl<std::make_index_sequence<sizeof...(Ts)>, Ts...>()
 			{
 			}
 
-			constexpr explicit Tuple(Ts&... args) noexcept
+			constexpr Tuple(Ts&... args) noexcept
 				: TupleImpl<std::make_index_sequence<sizeof...(Ts)>, Ts...>(static_cast<Ts&>(args)...)
 			{
 			}
 
-			constexpr explicit Tuple(const Ts&... args) noexcept
+			constexpr Tuple(const Ts&... args) noexcept
 				: TupleImpl<std::make_index_sequence<sizeof...(Ts)>, Ts...>(static_cast<const Ts&>(args)...)
 			{
 			}
 
-			constexpr explicit Tuple(Ts&&... args) noexcept
+			constexpr Tuple(Ts&&... args) noexcept
 				: TupleImpl<std::make_index_sequence<sizeof...(Ts)>, Ts...>(static_cast<Ts&&>(args)...)
 			{
 			}
 
-			constexpr explicit Tuple(const Ts&&... args) noexcept
+			constexpr Tuple(const Ts&&... args) noexcept
 				: TupleImpl<std::make_index_sequence<sizeof...(Ts)>, Ts...>(static_cast<const Ts&&>(args)...)
 			{
 			}
