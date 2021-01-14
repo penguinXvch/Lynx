@@ -14,25 +14,45 @@ namespace Lynx
 			template<std::size_t N, typename T>
 			struct TupleCell
 			{
-				constexpr explicit TupleCell() noexcept : value() {}
+				constexpr explicit TupleCell() noexcept
+					: value()
+				{
+				}
 
-				constexpr explicit TupleCell(const T& arg) noexcept : value(arg) {}
-				constexpr explicit TupleCell(T&& arg) noexcept : value(std::move(arg)) {}
+				constexpr explicit TupleCell(const T& arg) noexcept
+					: value(arg)
+				{
+				}
 
 				~TupleCell() noexcept = default;
 
-				constexpr explicit TupleCell(const TupleCell& tc) noexcept : value(tc.value) {}
-				constexpr explicit TupleCell(TupleCell&& tc) noexcept : value(std::move(tc.value)) {}
+				constexpr explicit TupleCell(const TupleCell& tc) noexcept
+					: value(tc.value)
+				{
+				}
+
+				constexpr explicit TupleCell(TupleCell&& tc) noexcept
+					: value(tc.value)
+				{
+					tc.value = T();
+				}
 
 				constexpr TupleCell& operator=(const TupleCell& tc) noexcept
 				{
-					value = tc.value;
+					if (this != &tc)
+					{
+						value = tc.value;
+					}
 					return *this;
 				}
 
 				constexpr TupleCell& operator=(TupleCell&& tc) noexcept
 				{
-					value = std::move(tc.value);
+					if (this != &tc)
+					{
+						value = tc.value;
+						tc.value = T();
+					}
 					return *this;
 				}
 
@@ -71,11 +91,6 @@ namespace Lynx
 
 				constexpr explicit TupleImpl(const Ts&... args) noexcept
 					: TupleCell<Ns, Ts>(static_cast<const Ts&>(args))...
-				{
-				}
-
-				constexpr explicit TupleImpl(Ts&&... args) noexcept
-					: TupleCell<Ns, Ts>(static_cast<Ts&&>(args))...
 				{
 				}
 
@@ -125,11 +140,6 @@ namespace Lynx
 
 			constexpr Tuple(const Ts&... args) noexcept
 				: TupleImpl<std::make_index_sequence<sizeof...(Ts)>, Ts...>(static_cast<const Ts&>(args)...)
-			{
-			}
-
-			constexpr Tuple(Ts&&... args) noexcept
-				: TupleImpl<std::make_index_sequence<sizeof...(Ts)>, Ts...>(static_cast<Ts&&>(args)...)
 			{
 			}
 
