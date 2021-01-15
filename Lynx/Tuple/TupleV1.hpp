@@ -180,6 +180,21 @@ namespace Lynx
 			}
 		};
 
+		template<>
+		struct Tuple<>
+		{
+			constexpr Tuple() noexcept = delete;
+			~Tuple() noexcept = delete;
+			constexpr Tuple(Tuple&) noexcept = delete;
+			constexpr Tuple(Tuple&&) noexcept = delete;
+			constexpr Tuple(const Tuple&) noexcept = delete;
+			constexpr Tuple(const Tuple&&) noexcept = delete;
+			constexpr Tuple& operator=(Tuple&) noexcept = delete;
+			constexpr Tuple& operator=(Tuple&&) noexcept = delete;
+			constexpr Tuple& operator=(const Tuple&) noexcept = delete;
+			constexpr Tuple& operator=(const Tuple&&) noexcept = delete;
+		};
+
 	} //# namespace Tuple_V1
 
 } //# namespace Lynx
