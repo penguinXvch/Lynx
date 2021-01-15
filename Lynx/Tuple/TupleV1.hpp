@@ -24,6 +24,19 @@ namespace Lynx
 				{
 				}
 
+				template<std::size_t I, typename U>
+				constexpr explicit TupleCell(const TupleCell<I, U>& tc) noexcept
+					: value(static_cast<T>(tc.value))
+				{
+				}
+
+				template<std::size_t I, typename U>
+				constexpr explicit TupleCell(TupleCell<I, U>&& tc) noexcept
+					: value(static_cast<T>(tc.value))
+				{
+					tc.value = U();
+				}
+
 				~TupleCell() noexcept = default;
 
 				constexpr explicit TupleCell(const TupleCell& tc) noexcept
@@ -94,6 +107,18 @@ namespace Lynx
 				{
 				}
 
+				template<std::size_t... Is, typename... Args>
+				constexpr explicit TupleImpl(const TupleImpl<std::index_sequence<Is...>, Args...>& ti) noexcept
+					: TupleCell<Ns, Ts>(static_cast<const TupleCell<Is, Args>&>(ti))...
+				{
+				}
+
+				template<std::size_t... Is, typename... Args>
+				constexpr explicit TupleImpl(TupleImpl<std::index_sequence<Is...>, Args...>&& ti) noexcept
+					: TupleCell<Ns, Ts>(static_cast<TupleCell<Is, Args>&&>(ti))...
+				{
+				}
+
 				~TupleImpl() noexcept = default;
 
 				constexpr explicit TupleImpl(const TupleImpl& ti) noexcept
@@ -140,6 +165,40 @@ namespace Lynx
 
 			constexpr Tuple(const Ts&... args) noexcept
 				: TupleImpl<std::make_index_sequence<sizeof...(Ts)>, Ts...>(static_cast<const Ts&>(args)...)
+			{
+			}
+
+			template
+			<
+				typename... Args,
+				typename = std::enable_if_t
+				<
+					sizeof...(Ts) == sizeof...(Args) &&
+					(std::is_constructible_v<Ts, const Args&> && ...)
+				>
+			>
+			constexpr Tuple(const Tuple<Args...>& tuple) noexcept
+				: TupleImpl<std::make_index_sequence<sizeof...(Ts)>, Ts...>
+				  (
+					  static_cast<const TupleImpl<std::make_index_sequence<sizeof...(Args)>, Args...>&>(tuple)
+				  )
+			{
+			}
+
+			template
+			<
+				typename... Args,
+				typename = std::enable_if_t
+				<
+					sizeof...(Ts) == sizeof...(Args) &&
+					(std::is_constructible_v<Ts, Args&&> && ...)
+				>
+			>
+			constexpr Tuple(Tuple<Args...>&& tuple) noexcept
+				: TupleImpl<std::make_index_sequence<sizeof...(Ts)>, Ts...>
+				  (
+					  static_cast<TupleImpl<std::make_index_sequence<sizeof...(Args)>, Args...>&&>(tuple)
+				  )
 			{
 			}
 
