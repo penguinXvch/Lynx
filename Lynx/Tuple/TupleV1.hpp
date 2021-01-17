@@ -72,21 +72,15 @@ namespace Lynx
 				template<std::size_t I, typename U>
 				constexpr TupleCell& operator=(const TupleCell<I, U>& tc) noexcept
 				{
-					if (this != &tc)
-					{
-						value = static_cast<T>(tc.value);
-					}
+					value = static_cast<T>(tc.value);
 					return *this;
 				}
 
 				template<std::size_t I, typename U>
 				constexpr TupleCell& operator=(TupleCell<I, U>&& tc) noexcept
 				{
-					if (this != &tc)
-					{
-						value = static_cast<T>(tc.value);
-						tc.value = U();
-					}
+					value = static_cast<T>(tc.value);
+					tc.value = U();
 					return *this;
 				}
 
