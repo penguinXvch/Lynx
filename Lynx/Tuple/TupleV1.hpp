@@ -69,6 +69,27 @@ namespace Lynx
 					return *this;
 				}
 
+				template<std::size_t I, typename U>
+				constexpr TupleCell& operator=(const TupleCell<I, U>& tc) noexcept
+				{
+					if (this != &tc)
+					{
+						value = static_cast<T>(tc.value);
+					}
+					return *this;
+				}
+
+				template<std::size_t I, typename U>
+				constexpr TupleCell& operator=(TupleCell<I, U>&& tc) noexcept
+				{
+					if (this != &tc)
+					{
+						value = static_cast<T>(tc.value);
+						tc.value = U();
+					}
+					return *this;
+				}
+
 				T value;
 			};
 		}
@@ -148,6 +169,26 @@ namespace Lynx
 					};
 					return *this;
 				}
+
+				template<std::size_t... Is, typename... Args>
+				constexpr TupleImpl& operator=(const TupleImpl<std::index_sequence<Is...>, Args...>& ti) noexcept
+				{
+					std::initializer_list<int>
+					{
+						(TupleCell<Ns, Ts>::template operator=<Is, Args>(static_cast<const TupleCell<Is, Args>&>(ti)), 0)...
+					};
+					return *this;
+				}
+
+				template<std::size_t... Is, typename... Args>
+				constexpr TupleImpl& operator=(TupleImpl<std::index_sequence<Is...>, Args...>&& ti) noexcept
+				{
+					std::initializer_list<int>
+					{
+						(TupleCell<Ns, Ts>::template operator=<Is, Args>(static_cast<TupleCell<Is, Args>&&>(ti)), 0)...
+					};
+					return *this;
+				}
 			};
 		}
 
@@ -174,7 +215,7 @@ namespace Lynx
 				typename = std::enable_if_t
 				<
 					sizeof...(Ts) == sizeof...(Args) &&
-					(std::is_constructible_v<Ts, const Args&> && ...)
+					(... && std::is_constructible_v<Ts, const Args&>)
 				>
 			>
 			constexpr Tuple(const Tuple<Args...>& tuple) noexcept
@@ -191,7 +232,7 @@ namespace Lynx
 				typename = std::enable_if_t
 				<
 					sizeof...(Ts) == sizeof...(Args) &&
-					(std::is_constructible_v<Ts, Args&&> && ...)
+					(... && std::is_constructible_v<Ts, Args&&>)
 				>
 			>
 			constexpr Tuple(Tuple<Args...>&& tuple) noexcept
@@ -234,6 +275,42 @@ namespace Lynx
 				TupleImpl<std::make_index_sequence<sizeof...(Ts)>, Ts...>::operator=
 				(
 					static_cast<TupleImpl<std::make_index_sequence<sizeof...(Ts)>, Ts...>&&>(tuple)
+				);
+				return *this;
+			}
+
+			template
+			<
+				typename... Args,
+				typename = std::enable_if_t
+				<
+					sizeof...(Ts) == sizeof...(Args) &&
+					(... && std::is_constructible_v<Ts, const Args&>)
+				>
+			>
+			constexpr Tuple& operator=(const Tuple<Args...>& tuple) noexcept
+			{
+				TupleImpl<std::make_index_sequence<sizeof...(Ts)>, Ts...>::template operator=
+				(
+					static_cast<const TupleImpl<std::make_index_sequence<sizeof...(Args)>, Args...>&>(tuple)
+				);
+				return *this;
+			}
+
+			template
+			<
+				typename... Args,
+				typename = std::enable_if_t
+				<
+					sizeof...(Ts) == sizeof...(Args) &&
+					(... && std::is_constructible_v<Ts, Args&&>)
+				>
+			>
+			constexpr Tuple& operator=(Tuple<Args...>&& tuple) noexcept
+			{
+				TupleImpl<std::make_index_sequence<sizeof...(Ts)>, Ts...>::template operator=
+				(
+					static_cast<TupleImpl<std::make_index_sequence<sizeof...(Args)>, Args...>&&>(tuple)
 				);
 				return *this;
 			}
