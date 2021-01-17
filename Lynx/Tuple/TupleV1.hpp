@@ -279,7 +279,7 @@ namespace Lynx
 				typename = std::enable_if_t
 				<
 					sizeof...(Ts) == sizeof...(Args) &&
-					(... && std::is_constructible_v<Ts, const Args&>)
+					(... && std::is_assignable_v<Ts&, const Args&>)
 				>
 			>
 			constexpr Tuple& operator=(const Tuple<Args...>& tuple) noexcept
@@ -297,7 +297,7 @@ namespace Lynx
 				typename = std::enable_if_t
 				<
 					sizeof...(Ts) == sizeof...(Args) &&
-					(... && std::is_constructible_v<Ts, Args&&>)
+					(... && std::is_assignable_v<Ts&, Args>)
 				>
 			>
 			constexpr Tuple& operator=(Tuple<Args...>&& tuple) noexcept
