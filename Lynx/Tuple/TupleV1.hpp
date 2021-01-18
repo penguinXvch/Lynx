@@ -536,4 +536,10 @@ namespace Lynx
 		return Tuple_V1::Tuple<Ts&...>{ args... };
 	}
 
+	template<typename... Ts>
+	inline constexpr void Swap(Tuple_V1::Tuple<Ts...>& a, Tuple_V1::Tuple<Ts...>& b) noexcept
+	{
+		a.Swap(b);
+	}
+
 } //# namespace Lynx
