@@ -84,6 +84,13 @@ namespace Lynx
 					return *this;
 				}
 
+				constexpr void Swap(TupleCell& tc) noexcept
+				{
+					T tmp = value;
+					value = tc.value;
+					tc.value = tmp;
+				}
+
 				T value;
 			};
 		}
@@ -182,6 +189,14 @@ namespace Lynx
 						(TupleCell<Ns, Ts>::template operator=<Is, Args>(static_cast<TupleCell<Is, Args>&&>(ti)), 0)...
 					};
 					return *this;
+				}
+
+				constexpr void Swap(TupleImpl& ti) noexcept
+				{
+					std::initializer_list<int>
+					{
+						(TupleCell<Ns, Ts>::Swap(static_cast<TupleCell<Ns, Ts>&>(ti)), 0)...
+					};
 				}
 			};
 		}
@@ -309,6 +324,14 @@ namespace Lynx
 					static_cast<TupleImpl<std::make_index_sequence<sizeof...(Args)>, Args...>&&>(tuple)
 				);
 				return *this;
+			}
+
+			constexpr void Swap(Tuple& tuple) noexcept
+			{
+				TupleImpl<std::make_index_sequence<sizeof...(Ts)>, Ts...>::Swap
+				(
+					static_cast<TupleImpl<std::make_index_sequence<sizeof...(Ts)>, Ts...>&>(tuple)
+				);
 			}
 		};
 
