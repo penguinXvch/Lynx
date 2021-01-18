@@ -482,9 +482,9 @@ namespace Lynx
 				return *this;
 			}
 		};
-	}
 
-	static const IgnoreType _;
+		const IgnoreType _;
+	}
 
 	template<typename... Ts>
 	inline constexpr auto Tie(Ts&... args) noexcept -> Tuple_V1::Tuple<Ts&...>
