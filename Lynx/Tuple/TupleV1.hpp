@@ -193,6 +193,8 @@ namespace Lynx
 		struct Tuple
 			: public TupleImpl<std::make_index_sequence<sizeof...(Ts)>, Ts...>
 		{
+			static constexpr std::size_t TupleSize = sizeof...(Ts);
+
 			constexpr Tuple() noexcept
 				: TupleImpl<std::make_index_sequence<sizeof...(Ts)>, Ts...>()
 			{
@@ -373,6 +375,27 @@ namespace Lynx
 		>;
 	};
 
+	template<typename>
+	struct TupleSize
+	{
+		constexpr explicit TupleSize() noexcept = delete;
+		~TupleSize() noexcept = delete;
+		constexpr explicit TupleSize(TupleSize&) noexcept = delete;
+		constexpr explicit TupleSize(TupleSize&&) noexcept = delete;
+		constexpr explicit TupleSize(const TupleSize&) noexcept = delete;
+		constexpr explicit TupleSize(const TupleSize&&) noexcept = delete;
+		constexpr TupleSize& operator=(TupleSize&) noexcept = delete;
+		constexpr TupleSize& operator=(TupleSize&&) noexcept = delete;
+		constexpr TupleSize& operator=(const TupleSize&) noexcept = delete;
+		constexpr TupleSize& operator=(const TupleSize&&) noexcept = delete;
+	};
+
+	template<typename... Ts>
+	struct TupleSize<Tuple_V1::Tuple<Ts...>>
+	{
+		static constexpr std::enable_if_t<(sizeof...(Ts) > 0), std::size_t> value = sizeof...(Ts);
+	};
+
 } //# namespace Lynx
 
 
@@ -416,15 +439,13 @@ namespace Lynx
 		template<std::size_t N, typename T, std::size_t I, typename U, typename... Us>
 		struct GetImpl
 		{
-			static_assert(I < N, "Index out of range.");
-			static constexpr std::size_t value = GetImpl<N, T, I + 1, Us...>::value;
+			static constexpr std::enable_if_t<(I < N), std::size_t> value = GetImpl<N, T, I + 1, Us...>::value;
 		};
 
 		template<std::size_t N, typename T, std::size_t I, typename... Us>
 		struct GetImpl<N, T, I, T, Us...>
 		{
-			static_assert(I < N, "Index out of range.");
-			static constexpr std::size_t value = I;
+			static constexpr std::enable_if_t<(I < N), std::size_t> value = I;
 		};
 	}
 
