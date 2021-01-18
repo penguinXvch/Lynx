@@ -483,7 +483,7 @@ namespace Lynx
 			}
 		};
 
-		const IgnoreType _;
+		inline constexpr IgnoreType _;
 	}
 
 	template<typename... Ts>
