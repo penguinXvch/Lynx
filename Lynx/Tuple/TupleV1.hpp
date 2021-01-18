@@ -26,13 +26,13 @@ namespace Lynx
 
 				template<std::size_t I, typename U>
 				constexpr explicit TupleCell(const TupleCell<I, U>& tc) noexcept
-					: value(static_cast<T>(tc.value))
+					: value(tc.value)
 				{
 				}
 
 				template<std::size_t I, typename U>
 				constexpr explicit TupleCell(TupleCell<I, U>&& tc) noexcept
-					: value(static_cast<T>(tc.value))
+					: value(tc.value)
 				{
 					tc.value = U();
 				}
@@ -72,14 +72,14 @@ namespace Lynx
 				template<std::size_t I, typename U>
 				constexpr TupleCell& operator=(const TupleCell<I, U>& tc) noexcept
 				{
-					value = static_cast<T>(tc.value);
+					value = tc.value;
 					return *this;
 				}
 
 				template<std::size_t I, typename U>
 				constexpr TupleCell& operator=(TupleCell<I, U>&& tc) noexcept
 				{
-					value = static_cast<T>(tc.value);
+					value = tc.value;
 					tc.value = U();
 					return *this;
 				}
