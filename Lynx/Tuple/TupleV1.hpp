@@ -419,6 +419,31 @@ namespace Lynx
 		static constexpr std::enable_if_t<(sizeof...(Ts) > 0), std::size_t> value = sizeof...(Ts);
 	};
 
+	template<typename... Ts>
+	struct TupleSize<const Tuple_V1::Tuple<Ts...>> : public TupleSize<Tuple_V1::Tuple<Ts...>>
+	{
+	};
+
+	template<typename... Ts>
+	struct TupleSize<Tuple_V1::Tuple<Ts...>&> : public TupleSize<Tuple_V1::Tuple<Ts...>>
+	{
+	};
+
+	template<typename... Ts>
+	struct TupleSize<const Tuple_V1::Tuple<Ts...>&> : public TupleSize<Tuple_V1::Tuple<Ts...>>
+	{
+	};
+
+	template<typename... Ts>
+	struct TupleSize<Tuple_V1::Tuple<Ts...>&&> : public TupleSize<Tuple_V1::Tuple<Ts...>>
+	{
+	};
+
+	template<typename... Ts>
+	struct TupleSize<const Tuple_V1::Tuple<Ts...>&&> : public TupleSize<Tuple_V1::Tuple<Ts...>>
+	{
+	};
+
 } //# namespace Lynx
 
 
