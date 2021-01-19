@@ -542,4 +542,30 @@ namespace Lynx
 		a.Swap(b);
 	}
 
+	namespace
+	{
+		template<std::size_t... Ns, typename... Ts>
+		inline constexpr bool OperatorEqual
+		(
+			const std::index_sequence<Ns...>&,
+			const Tuple_V1::Tuple<Ts...>& a,
+			const Tuple_V1::Tuple<Ts...>& b
+		) noexcept
+		{
+			return (... && (Get<Ns>(a) == Get<Ns>(b)));
+		}
+	}
+
+	template<typename... Ts>
+	inline constexpr bool operator==(const Tuple_V1::Tuple<Ts...>& a, const Tuple_V1::Tuple<Ts...>& b) noexcept
+	{
+		return OperatorEqual(std::make_index_sequence<sizeof...(Ts)>{}, a, b);
+	}
+
+	template<typename... Ts>
+	inline constexpr bool operator!=(const Tuple_V1::Tuple<Ts...>& a, const Tuple_V1::Tuple<Ts...>& b) noexcept
+	{
+		return !OperatorEqual(std::make_index_sequence<sizeof...(Ts)>{}, a, b);
+	}
+
 } //# namespace Lynx
