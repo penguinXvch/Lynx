@@ -602,7 +602,7 @@ namespace Lynx
 		template<std::size_t... Ns, typename... Ts>
 		inline constexpr bool OperatorEqual
 		(
-			const std::index_sequence<Ns...>&,
+			std::index_sequence<Ns...>,
 			const Tuple_V1::Tuple<Ts...>& a,
 			const Tuple_V1::Tuple<Ts...>& b
 		) noexcept
