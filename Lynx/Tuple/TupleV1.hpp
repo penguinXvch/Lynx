@@ -624,3 +624,126 @@ namespace Lynx
 	}
 
 } //# namespace Lynx
+
+
+namespace Lynx
+{
+
+	namespace
+	{
+		template<template<typename...> class>
+		struct IsLynxTupleV1Tuple
+		{
+			static constexpr bool value = false;
+		};
+
+		template<>
+		struct IsLynxTupleV1Tuple<::Lynx::Tuple_V1::Tuple>
+		{
+			static constexpr bool value = true;
+		};
+	}
+
+	namespace
+	{
+		template<typename...>
+		struct OutputType;
+
+		template
+		<
+			template<typename...> typename Tuple,
+			typename... Ts
+		>
+		struct OutputType<Tuple<Ts...>>
+		{
+			using type = std::enable_if_t
+			<
+				(IsLynxTupleV1Tuple<Tuple>::value && (sizeof...(Ts) > 0)),
+				Tuple<std::remove_reference_t<Ts>...>
+			>;
+		};
+
+		template
+		<
+			template<typename...> typename Tuple,
+			typename... Ts1,
+			typename... Ts2
+		>
+		struct OutputType<Tuple<Ts1...>, Tuple<Ts2...>>
+		{
+			using type = std::enable_if_t
+			<
+				(IsLynxTupleV1Tuple<Tuple>::value && (sizeof...(Ts1) > 0) && (sizeof...(Ts2) > 0)),
+				Tuple<std::remove_reference_t<Ts1>..., std::remove_reference_t<Ts2>...>
+			>;
+		};
+
+		template
+		<
+			template<typename...> typename Tuple,
+			typename... Ts1,
+			typename... Ts2,
+			typename... Us
+		>
+		struct OutputType<Tuple<Ts1...>, Tuple<Ts2...>, Us...>
+		{
+			using type = std::enable_if_t
+			<
+				(IsLynxTupleV1Tuple<Tuple>::value && (sizeof...(Ts1) > 0) && (sizeof...(Ts2) > 0)),
+				typename OutputType<Tuple<std::remove_reference_t<Ts1>..., std::remove_reference_t<Ts2>...>, Us...>::type
+			>;
+		};
+	}
+
+	namespace
+	{
+		template<typename T, std::size_t... Ns>
+		inline constexpr auto TupleCatImpl(T&& arg, std::index_sequence<Ns...>) noexcept
+			-> typename OutputType<std::remove_cv_t<std::remove_reference_t<T>>>::type
+		{
+			return { Get<Ns>(std::forward<T>(arg))... };
+		}
+
+		template<typename T, std::size_t... Ns, typename U, std::size_t... Is>
+		inline constexpr auto TupleCatImpl(T&& arg1, std::index_sequence<Ns...>, U&& arg2, std::index_sequence<Is...>) noexcept
+			-> typename OutputType<std::remove_cv_t<std::remove_reference_t<T>>, std::remove_cv_t<std::remove_reference_t<U>>>::type
+		{
+			return { Get<Ns>(std::forward<T>(arg1))..., Get<Is>(std::forward<U>(arg2))... };
+		}
+	}
+
+	template<typename T>
+	inline constexpr auto TupleCat(T&& arg) noexcept
+		-> typename OutputType<std::remove_cv_t<std::remove_reference_t<T>>>::type
+	{
+		return TupleCatImpl(std::forward<T>(arg), std::make_index_sequence<TupleSize<T>::value>{});
+	}
+
+	template<typename T, typename U>
+	inline constexpr auto TupleCat(T&& arg1, U&& arg2) noexcept
+		-> typename OutputType<std::remove_cv_t<std::remove_reference_t<T>>, std::remove_cv_t<std::remove_reference_t<U>>>::type
+	{
+		return TupleCatImpl
+		(
+			std::forward<T>(arg1), std::make_index_sequence<TupleSize<T>::value>{},
+			std::forward<U>(arg2), std::make_index_sequence<TupleSize<U>::value>{}
+		);
+	}
+
+	template<typename T, typename U, typename... Vs>
+	inline constexpr auto TupleCat(T&& arg1, U&& arg2, Vs&&... args) noexcept
+		-> typename OutputType
+		<
+			std::remove_cv_t<std::remove_reference_t<T>>,
+			std::remove_cv_t<std::remove_reference_t<U>>,
+			std::remove_cv_t<std::remove_reference_t<Vs>>...
+		>::type
+	{
+		return TupleCat
+		(
+			TupleCat(std::forward<T>(arg1), std::forward<U>(arg2)),
+			TupleCat(std::forward<Vs>(args)...)
+		);
+	}
+
+} //# namespace Lynx
