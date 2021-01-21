@@ -398,6 +398,17 @@ namespace Lynx
 		>;
 	};
 
+	template<std::size_t N, typename... Ts>
+	struct TupleElementType<N, const Tuple_V1::Tuple<Ts...>> : public TupleElementType<N, Tuple_V1::Tuple<Ts...>> {};
+	template<std::size_t N, typename... Ts>
+	struct TupleElementType<N, Tuple_V1::Tuple<Ts...>&> : public TupleElementType<N, Tuple_V1::Tuple<Ts...>> {};
+	template<std::size_t N, typename... Ts>
+	struct TupleElementType<N, const Tuple_V1::Tuple<Ts...>&> : public TupleElementType<N, Tuple_V1::Tuple<Ts...>> {};
+	template<std::size_t N, typename... Ts>
+	struct TupleElementType<N, Tuple_V1::Tuple<Ts...>&&> : public TupleElementType<N, Tuple_V1::Tuple<Ts...>> {};
+	template<std::size_t N, typename... Ts>
+	struct TupleElementType<N, const Tuple_V1::Tuple<Ts...>&&> : public TupleElementType<N, Tuple_V1::Tuple<Ts...>> {};
+
 	template<typename>
 	struct TupleSize
 	{
@@ -420,59 +431,15 @@ namespace Lynx
 	};
 
 	template<typename... Ts>
-	struct TupleSize<const Tuple_V1::Tuple<Ts...>> : public TupleSize<Tuple_V1::Tuple<Ts...>>
-	{
-	};
-
+	struct TupleSize<const Tuple_V1::Tuple<Ts...>> : public TupleSize<Tuple_V1::Tuple<Ts...>> {};
 	template<typename... Ts>
-	struct TupleSize<volatile Tuple_V1::Tuple<Ts...>> : public TupleSize<Tuple_V1::Tuple<Ts...>>
-	{
-	};
-
+	struct TupleSize<Tuple_V1::Tuple<Ts...>&> : public TupleSize<Tuple_V1::Tuple<Ts...>> {};
 	template<typename... Ts>
-	struct TupleSize<const volatile Tuple_V1::Tuple<Ts...>> : public TupleSize<Tuple_V1::Tuple<Ts...>>
-	{
-	};
-
+	struct TupleSize<const Tuple_V1::Tuple<Ts...>&> : public TupleSize<Tuple_V1::Tuple<Ts...>> {};
 	template<typename... Ts>
-	struct TupleSize<Tuple_V1::Tuple<Ts...>&> : public TupleSize<Tuple_V1::Tuple<Ts...>>
-	{
-	};
-
+	struct TupleSize<Tuple_V1::Tuple<Ts...>&&> : public TupleSize<Tuple_V1::Tuple<Ts...>> {};
 	template<typename... Ts>
-	struct TupleSize<const Tuple_V1::Tuple<Ts...>&> : public TupleSize<Tuple_V1::Tuple<Ts...>>
-	{
-	};
-
-	template<typename... Ts>
-	struct TupleSize<volatile Tuple_V1::Tuple<Ts...>&> : public TupleSize<Tuple_V1::Tuple<Ts...>>
-	{
-	};
-
-	template<typename... Ts>
-	struct TupleSize<const volatile Tuple_V1::Tuple<Ts...>&> : public TupleSize<Tuple_V1::Tuple<Ts...>>
-	{
-	};
-
-	template<typename... Ts>
-	struct TupleSize<Tuple_V1::Tuple<Ts...>&&> : public TupleSize<Tuple_V1::Tuple<Ts...>>
-	{
-	};
-
-	template<typename... Ts>
-	struct TupleSize<const Tuple_V1::Tuple<Ts...>&&> : public TupleSize<Tuple_V1::Tuple<Ts...>>
-	{
-	};
-
-	template<typename... Ts>
-	struct TupleSize<volatile Tuple_V1::Tuple<Ts...>&&> : public TupleSize<Tuple_V1::Tuple<Ts...>>
-	{
-	};
-
-	template<typename... Ts>
-	struct TupleSize<const volatile Tuple_V1::Tuple<Ts...>&&> : public TupleSize<Tuple_V1::Tuple<Ts...>>
-	{
-	};
+	struct TupleSize<const Tuple_V1::Tuple<Ts...>&&> : public TupleSize<Tuple_V1::Tuple<Ts...>> {};
 
 } //# namespace Lynx
 
