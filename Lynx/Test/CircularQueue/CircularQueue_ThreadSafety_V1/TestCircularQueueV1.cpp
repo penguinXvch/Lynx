@@ -143,6 +143,7 @@ namespace Test
 				PassOrFail(cq1.AddData("1str") == true);
 				PassOrFail(cq1.AddData("2str") == true);
 				PassOrFail(cq1.AddData("3str") == true);
+
 				std::string str4 = "str4", str5 = "str5";
 				PassOrFail(cq1.AddData(str4) == true);
 				PassOrFail(cq1.AddData(str5) == true);
@@ -159,6 +160,24 @@ namespace Test
 				std::vector<std::string> vec2 = cq2.GetData();
 				PassOrFail(vec2.size() == 1);
 				PassOrFail(vec2[0] == "str5");
+
+				CircularQueue<std::string> cq3(0);
+
+				PassOrFail(cq3.AddData(str4) == false);
+				PassOrFail(cq3.AddData("str5") == false);
+
+				std::vector<std::string> vec3 = cq3.GetData();
+				PassOrFail(vec3.size() == 0);
+
+				CircularQueue<std::string> cq4(3);
+
+				std::vector<std::string> vec4 = cq4.GetData();
+				PassOrFail(vec4.size() == 0);
+
+				CircularQueue<std::string> cq5(0);
+
+				std::vector<std::string> vec5 = cq5.GetData();
+				PassOrFail(vec5.size() == 0);
 			}
 			PassTest();
 
