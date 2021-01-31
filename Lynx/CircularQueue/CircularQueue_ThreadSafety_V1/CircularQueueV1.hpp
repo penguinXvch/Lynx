@@ -62,9 +62,13 @@ namespace Lynx
 
 		template<typename T>
 		CircularQueue<T>::CircularQueue(const std::size_t& len)
-			: mArr(nullptr), mLen(len), mFrontPointer(0), mBackPointer(0), mCount(0), mMutex()
+			: mArr(nullptr), mLen(0), mFrontPointer(0), mBackPointer(0), mCount(0), mMutex()
 		{
-			if (len != 0)
+			std::lock_guard<std::mutex> _(mMutex);
+
+			mLen = len;
+
+			if (mLen != 0)
 			{
 				mArr = new T[mLen];
 			}
@@ -73,6 +77,8 @@ namespace Lynx
 		template<typename T>
 		CircularQueue<T>::~CircularQueue() noexcept
 		{
+			std::lock_guard<std::mutex> _(mMutex);
+
 			if (mArr != nullptr)
 			{
 				delete[] mArr;
@@ -84,6 +90,7 @@ namespace Lynx
 		void CircularQueue<T>::SetCircularQueueSize(const std::size_t& len)
 		{
 			std::lock_guard<std::mutex> _(mMutex);
+
 			if (mArr == nullptr && len != 0)
 			{
 				mLen = len;
@@ -95,6 +102,7 @@ namespace Lynx
 		std::size_t CircularQueue<T>::GetCircularQueueSize() noexcept
 		{
 			std::lock_guard<std::mutex> _(mMutex);
+
 			return mLen;
 		}
 
@@ -141,7 +149,8 @@ namespace Lynx
 			{
 				vec.push_back(mArr[index]);
 				index = (index + 1) % mLen;
-			} while (index != mFrontPointer);
+			}
+			while (index != mFrontPointer);
 
 			return vec;
 		}
