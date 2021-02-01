@@ -36,15 +36,15 @@ namespace Lynx
             bool Push(const T& value) noexcept;
             bool Pop(T& value) noexcept;
 
-        private:
+        protected:
             std::array<T, N> mArr;
             
-        private:
+        protected:
             std::size_t mFrontPointer;
             std::size_t mBackPointer;
             std::size_t mCount;
             
-        private:
+        protected:
             std::mutex mMutex;
         };
 

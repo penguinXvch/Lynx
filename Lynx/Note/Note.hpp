@@ -23,9 +23,11 @@ namespace Lynx
     ::Lynx::Note::CheckNoteLength(L##StringLiteral);
 
 #define Note(StringLiteral)													\
-    static_assert(															\
+    static_assert															\
+	(																		\
         ((sizeof(L##StringLiteral) / sizeof(wchar_t)) > NoteLengthLimit),	\
-        "Code notes are too short.");
+        "Code notes are too short."											\
+	);
 
 	} //# namespace Note
 

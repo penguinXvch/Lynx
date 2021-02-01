@@ -41,16 +41,16 @@ namespace Lynx
 			bool AddData(const T& data) noexcept;
 			std::vector<T> GetData() noexcept;
 
-		private:
+		protected:
 			T* mArr;
 			std::size_t mLen;
 
-		private:
+		protected:
 			std::size_t mFrontPointer;
 			std::size_t mBackPointer;
 			std::size_t mCount;
 
-		private:
+		protected:
 			std::mutex mMutex;
 		};
 
@@ -66,10 +66,9 @@ namespace Lynx
 		{
 			std::lock_guard<std::mutex> _(mMutex);
 
-			mLen = len;
-
-			if (mLen != 0)
+			if (len != 0)
 			{
+				mLen = len;
 				mArr = new T[mLen];
 			}
 		}

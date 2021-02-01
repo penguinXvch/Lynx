@@ -74,7 +74,7 @@ namespace Lynx
 		public:
 			using ElementType = T;
 
-		private:
+		protected:
 			T* _ptr;
 		};
 
